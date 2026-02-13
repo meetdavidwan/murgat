@@ -1,0 +1,56 @@
+**Role:** You are an expert Annotator for multimodal datasets.
+
+**Task:** Break down the provided **Source Sentence** into a list of independent, self-contained atomic facts.
+
+**Definitions:**
+1. **Atomic Fact:** A short, standalone sentence containing a singular piece of information (e.g., an action, an object's presence, a specific property, or a quantity).
+2. **Citations:** Parenthetical references like `(visual, 0:00)` or `(audio, 1:05)`.
+
+**Critical Rules:**
+
+1. **Meta-Talk & Metadata Removal:**
+   - **Remove** navigational phrases that describe the video medium rather than the content.
+     - *Remove:* "The video shows," "The audio contains," "We can see," "The narrator states," "In the first example."
+     - *Keep:* The actual content shown or stated.
+   - **Example:** "The video shows a boy holding a guitar (visual, 0:05)." $\to$ "- A boy is holding a guitar (visual, 0:05)."
+   - **Example:** "The narrator says 'Hello' (audio, 0:10)." $\to$ "- A person says 'Hello' (audio, 0:10)."
+   - **Ignore Metadata:** Do not create facts about the video structure itself (e.g., ignore "The clip ends at 0:55" unless it's relevant to the narrative content).
+
+2. **Adherence to Original Text:**
+   - Adhere strictly to the original wording for technical terms, formulas, values, and equations. Do not reformat or interpret them (e.g., keep LaTeX or math symbols exactly as they appear in the source).
+
+3. **Granularity (Split Adjectives & Actions):**
+   - Split compound properties. "The music is lyrical and flowing" becomes two facts: one for "lyrical", one for "flowing".
+   - Split compound actions. "He runs and jumps" becomes two facts.
+
+4. **Citation Logic:**
+   - **Propagation:** If the source sentence has a citation, **every** resulting atomic fact must inherit it.
+   - **Splitting:** If citations are embedded (e.g., "A (visual, 1:00) hits B (visual, 2:00)"), assign the specific citation only to the relevant fact.
+   - **No Valid Citation:** If the source text contains no citations, do not add any. Output the facts without citations.
+
+**Examples:**
+
+*Input:* A male character with long dreadlocks, dressed in a pink button-down shirt and a black vest, stands at a microphone (visual, 0:06).
+*Output:*
+- A male character is present (visual, 0:06).
+- The character has long dreadlocks (visual, 0:06).
+- The character is dressed in a pink button-down shirt (visual, 0:06).
+- The character is dressed in a black vest (visual, 0:06).
+- The character stands at a microphone (visual, 0:06).
+
+*Input:* The video states that product costs include direct material, direct labor, and overhead (visual, 0:15-0:18; audio, 0:15-0:18).
+*Output:*
+- Product costs include direct material (visual, 0:15-0:18; audio, 0:15-0:18).
+- Product costs include direct labor (visual, 0:15-0:18; audio, 0:15-0:18).
+- Product costs include overhead (visual, 0:15-0:18; audio, 0:15-0:18).
+
+*Input:* Later, the speaker also mentions, "the police are watching this through on CCTV" (audio, 0:42-0:43), further indicating police involvement and their impending arrival.
+*Output:*
+- The statement "The police are watching this through on CCTV" is made (audio, 0:42-0:43).
+- The statement indicates police involvement.
+- The statement indicates the police's impending arrival.
+
+**Current Sentence:**
+{sent}
+
+**Output:**

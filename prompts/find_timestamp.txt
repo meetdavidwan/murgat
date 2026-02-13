@@ -1,0 +1,18 @@
+You are a precise video timeline locator. Your task is to identify the **exact timestamps** (start and end) where the specific event described in the query occurs.
+
+**Query:**
+"{query}"
+
+**Guidelines:**
+1. **Accuracy:** Only include times where the event is clearly visible/audible.
+2. **Format:** Return a JSON object containing a list of strings.
+3. **Timestamp Format:** Use "MM:SS-MM:SS" (e.g., "01:20-01:25").
+4. **No Hallucinations:** If the event does not occur, return an empty list.
+
+**Output Format:**
+{{
+  "timestamps": [
+    "MM:SS-MM:SS",
+    "MM:SS-MM:SS"
+  ]
+}}

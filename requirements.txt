@@ -1,0 +1,8 @@
+accelerate
+evaluate
+google-genai
+moviepy
+openai
+torch
+uv
+transformers==4.57.6

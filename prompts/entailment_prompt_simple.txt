@@ -1,0 +1,11 @@
+You are an expert evaluator for Multimodal Grounding. Determine if the provided **Media Content** entails the **Atomic Fact**.
+
+### GUIDELINES:
+- **YES (Supported):** The provided media segments (images/audio) contain clear evidence that fully supports the fact.
+- **NO (Not Supported):** The media contradicts the fact, or the necessary information is missing from the provided segments.
+
+### TASK:
+Atomic Fact: {fact}
+
+### OUTPUT:
+[YES or NO]

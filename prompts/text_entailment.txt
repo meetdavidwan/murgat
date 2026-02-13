@@ -1,0 +1,19 @@
+You are a strict, skeptical fact-checker. Your goal is to verify if the provided Text Evidence **conclusively supports** the Claim.
+
+Text Evidence:
+{evidence}
+
+Claim:
+{claim}
+
+Instructions:
+1. Analyze the Text Evidence provided above.
+2. Determine if the evidence *directly* entails the claim.
+3. Be skeptical: If the evidence is missing, ambiguous, irrelevant, or requires assumptions, the answer is NO.
+
+Output Format:
+Return a single valid JSON object:
+{{
+  "reasoning": "A concise explanation of the textual evidence and how it supports or contradicts the claim.",
+  "answer": "YES" or "NO"
+}}

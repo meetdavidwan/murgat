@@ -1,0 +1,28 @@
+Carefully watch the provided video and listen strictly to the corresponding audio. Your task is to select the best option that answers the question, based **exclusively** on the provided content.
+
+Before stating your final answer, you must provide a step-by-step reasoning process.
+
+**Strict Citation Rules:**
+
+1.  **Mandatory Citations:** Every single sentence containing a factual claim or observation must end with a specific citation in parentheses.
+2.  **Narrative vs. Timestamp:** * **Do NOT** include specific numeric timestamps (e.g., "at 0:15", "from 0:50 onwards") inside the narrative text. 
+    * **DO** describe the events using relative temporal language if needed (e.g., "At the beginning," "Later," "Simultaneously").
+    * The numeric timestamp belongs **only** inside the parenthetical citation.
+3.  **Citation Format:** Use `(modality, timestamp)`. 
+    * **Modality:** `visual` or `audio`.
+    * **Timestamp:** `MM:SS` (for specific moments) or `MM:SS-MM:SS` (for ranges).
+4.  **Combined Evidence:** If multiple pieces of evidence are needed (e.g., audio and visual, or two different times), separate them with a **semicolon** inside the same parentheses.
+
+**Examples of Correct vs. Incorrect Formatting:**
+
+* **Incorrect (Timestamp in text):** "From 0:50 onwards, the melody continues with sustained notes."
+* **Incorrect (Missing formal citation):** "The melody continues with sustained notes at the end of the visual."
+* **CORRECT:** "Towards the end, the melody continues with sustained notes and a deliberate pace (audio, 0:50-0:55)."
+* **CORRECT (Multiple citations):** "The man points at the screen while speaking (visual, 0:12; audio, 0:12-0:14)."
+
+**Output Format:**
+Reasoning: [Your step-by-step reasoning following the strict citation rules above]
+Answer: [Only the letter of the correct option]
+
+Question: {question}
+{options}

@@ -1,0 +1,15 @@
+You are an expert evaluator for Multimodal Grounding. Classify if the **Sentence** contains **CHECK-WORTHY** information.
+
+### GUIDELINES:
+- **YES:** The sentence describes ANY specific, verifiable content in the video/audio (actions, objects, quantities, text, visual attributes).
+- **NO:** The sentence consists **ENTIRELY** of metadata (e.g., "Option A is correct"), reasoning (e.g., "Therefore, it matches"), general knowledge, or subjective opinions.
+
+### TASK:
+Sentence: {sentence}
+
+### OUTPUT FORMAT:
+Return a single JSON object:
+{{
+  "reasoning": "string (Explain if the sentence contains visual claims or if it is purely metadata/logic)",
+  "label": "string (YES or NO)"
+}}

@@ -1,0 +1,18 @@
+**Role:** You are an expert Linguistic Editor specializing in video caption refinement.
+
+**Task:** Rewrite the text below to resolve vague references (pronouns, generic nouns) with specific entity names, strictly adhering to chronological availability of information.
+
+**Primary Directive: The "Forward-Only" Rule**
+You must resolve references based **ONLY** on information established in the text *prior* to the sentence you are editing.
+* **Forbidden:** Do not "back-fill" details. If Sentence 1 says "A man enters" and Sentence 2 says "The doctor sits," you cannot change Sentence 1 to "The doctor enters." (We didn't know he was a doctor yet).
+* **Allowed:** If Sentence 1 introduces "Jeff" and Sentence 2 says "He," you must change "He" to "Jeff."
+
+**Strict Constraints:**
+1.  **Preserve Citations:** Keep every citation (e.g., `(visual, 0:05)`, `[audio, 0:03-0:08]`) exactly where it appears in the text. Do not move or merge them.
+2.  **Verify Claims:** Do not add descriptive adjectives (like "red car", "angry man") unless that specific sentence or a *prior* one explicitly establishes that attribute.
+3.  **Minimalism:** Replace the pronoun with the closest sufficient noun (e.g., replace "it" with "the creature", not "the giant one-armed red creature" unless necessary for disambiguation).
+
+**Input Text:**
+{{INPUT_TEXT}}
+
+**Output (Rewritten Text):**

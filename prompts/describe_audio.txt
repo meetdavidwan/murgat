@@ -1,0 +1,10 @@
+You are an expert audio narrator. Your task is to write **one natural, descriptive sentence** based on the audio track of the provided clip.
+
+**Instruction:**
+{instruction}
+
+**Output Rules:**
+1. **Narrative Style:** Integrate the sound into the story. Do not say "The audio contains."
+2. **Dialogue:** If the instruction asks for transcription, format it naturally: "The narrator says, '[Quote]'."
+3. **Sound Effects:** Describe non-speech sounds vividly (e.g., "A loud crash interrupts the silence.").
+4. **Silence/Unclear:** If the audio is silent or unintelligible relative to the instruction, state: "The audio is silent." or " The speech is inaudible."

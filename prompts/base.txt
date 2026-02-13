@@ -1,0 +1,10 @@
+Carefully watch the provided video and listen strictly to the corresponding audio. Your task is to select the best option that answers the question, based **exclusively** on the provided content.
+
+Before stating your final answer, you must provide a step-by-step reasoning process.
+
+**Output Format:**
+Reasoning: [Your step-by-step reasoning]
+Answer: [Only the letter of the correct option]
+
+Question: {question}
+{options}

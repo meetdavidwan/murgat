@@ -1,0 +1,105 @@
+from typing import List, Union, Optional, Dict
+from video_utils import Video, TimeRange, answer_question
+
+"""
+You are an intelligent video analyst. Your task is to write a Python script to answer a specific question based on a provided video.
+
+**The Workflow**
+Generate a Python function `execute_command` that:
+1. **Dynamically finds** timestamps using `video.find()`.
+2. Inspects those found moments using `video.query()`.
+3. Collects structured evidence (strings).
+4. Uses `answer_question` to select the final option.
+
+API SPECIFICATION:
+------------------
+class Video:
+    def find(self, event_description: str, modality: str = "visual") -> List[str]:
+        '''
+        Scans video for timestamps where an event occurs.
+        Args:
+            modality: MUST be "visual" or "audio".
+        Returns:
+            List[str]: A list of timestamps formatted as "MM:SS-MM:SS".
+        '''
+        pass
+
+    def query(self, time: Union[str, List[str]], question: str, modality: str = "visual") -> str:
+        '''
+        Inspects specific timestamps to describe details.
+        Args:
+            modality: MUST be "visual" or "audio".
+        Args:
+            time: A string "MM:SS" or list ["MM:SS", ...].
+        '''
+        pass
+
+def answer_question(question: str, evidence: Dict, options: List[str]) -> str:
+    ''' Synthesizes the final answer using the collected evidence. '''
+    pass
+
+GUIDELINES:
+- Write code: use loops, variable assignments, and logical flow.
+- Never guess numbers; always use `video.find()` to get timestamps.
+"""
+
+# EXAMPLE 1: Action Counting
+# Question: How many times does the one-armed monster appear?
+# Options: [A] 1, [B] 2, [C] 4, [D] 5
+def execute_command(video: Video, options: List[str]) -> str:
+    # 1. Find the events dynamically
+    # Broad search or specific context searches
+    times_doorway = video.find("one-armed monster runs out of doorway", modality="visual")
+    times_tv = video.find("monster emerges after TV puzzle", modality="visual")
+    times_attack = video.find("monster rushes player OR in sniper scope", modality="visual")
+
+    # 2. Verify the findings
+    sightings = []
+    
+    # Helper to query a list of times
+    for t in times_doorway:
+        sightings.append(video.query(t, "Check if the monster runs out of the doorway", modality="visual"))
+    for t in times_tv:
+        sightings.append(video.query(t, "Check if the monster emerges after the TV puzzle", modality="visual"))
+    for t in times_attack:
+        sightings.append(video.query(t, "Check for subsequent attacks by the monster", modality="visual"))
+
+    evidence = {{
+        "verified_sightings": sightings
+    }}
+
+    return answer_question(
+        question="How many times does the one-armed monster appear?",
+        evidence=evidence,
+        options=options
+    )
+
+# EXAMPLE 2: Audio-Visual Grounding
+# Question: Who in the video says, "This is called 'Song To You'"?
+# Options: [A] The Drummer, [B] The Guitarist, [C] The Singer, [D] The Host
+def execute_command(video: Video, options: List[str]) -> str:
+    # 1. Find the specific audio event
+    speech_segments = video.find("someone saying 'This is called Song To You'", modality="audio")
+
+    # 2. Inspect the visual source for each segment found
+    evidence_list = []
+    
+    for segment in speech_segments:
+        # Verify the audio
+        audio_obs = video.query(segment, "Transcribe the exact speech.", modality="audio")
+        
+        # Describe the speaker visually at that same timestamp
+        visual_obs = video.query(segment, "Describe the appearance of the person speaking.", modality="visual")
+        
+        evidence_list.append({{"audio": audio_obs, "visual": visual_obs}})
+
+    return answer_question(
+        question="Who in the video says, 'This is called Song To You'?",
+        evidence={{"candidates": evidence_list}},
+        options=options
+    )
+
+# YOUR TASK
+# Question: {question}
+# Options: {options}
+def execute_command(video: Video, options: List[str]) -> str:

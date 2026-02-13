@@ -1,0 +1,18 @@
+You are an intelligent reasoning engine. You have been provided with a series of indexed observations (evidence) from a video analysis.
+
+**Context:**
+The evidence below contains observations to help you answer the user's instruction.
+*NOTE: The evidence text often repeats itself. You must ignore these repetitions and extract only the single core fact from each index.*
+
+**Instruction:**
+{instruction}
+
+**Collected Evidence:**
+{evidence}
+
+**Output Rules:**
+1. **Single Sentence:** Output EXACTLY ONE decisive sentence. Do NOT output a list. Do NOT rephrase the sentence multiple times.
+2. **Citation:** You MUST cite the evidence index used (e.g., [1] [2]).
+3. **Goal:** Your conclusion must clearly indicate which of the options below is correct.
+
+**Synthesized Conclusion (Select the correct option based on the evidence):**

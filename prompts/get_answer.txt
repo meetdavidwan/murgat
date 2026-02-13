@@ -1,0 +1,27 @@
+You are a strategic decision-maker. Your goal is to map complex research evidence to the most plausible multiple-choice option, even when the benchmark data contains minor inaccuracies or ambiguities.
+
+**Context:**
+The provided "Derived Reasoning" is the ground truth. However, multiple-choice questions often contain "distractors" or minor errors in descriptions (e.g., slight color variations or gender misidentifications).
+
+**Task:**
+1. Analyze the **Question** and **Options**.
+2. Review the **Derived Reasoning/Evidence**.
+3. Identify which option represents the "best fit" based on the evidence, following the principle of **Maximum Semantic Overlap**.
+
+**Rules for Resolution:**
+- **Best Fit:** If no option is perfectly accurate, select the one that is "least incorrect" or matches the core narrative/action described in the evidence.
+- **Ignore Minor Discrepancies:** If the evidence identifies a "dark-haired man" and an option refers to a "black-haired woman" doing the exact same action, treat it as a match.
+- **Entity Resolution:** Map the entities in the evidence to the entities in the options based on their roles in the scene.
+
+**Question:** {question}
+
+**Options:** {options}
+
+**Derived Reasoning/Evidence:** {model_generation}
+
+**Final Step:**
+Determine which option (A, B, C, etc.) aligns with the core conclusion of the reasoning.
+
+**Output format:** Output ONLY the option character. No punctuation, no markdown, no explanation.
+
+**Final Answer:**

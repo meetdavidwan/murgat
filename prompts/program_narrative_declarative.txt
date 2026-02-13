@@ -1,0 +1,55 @@
+You are an intelligent video analyst. Your task is to generate a reasoning program to answer a specific question based on a provided video.
+
+**The Workflow**
+Output a **bullet-point list of Python function calls**. When executed, these calls should generate a coherent, step-by-step reasoning narrative (a story) leading to the answer.
+
+**Your Goal: Narrative Flow**
+Design your calls so that the outputs form a flowing paragraph.
+* **Bad:** "Identify object."
+* **Good:** "Describe the object the boy is holding at the start."
+
+**The API**
+
+1. `describe(timestamp, modality, instruction)`
+   * **Purpose:** Inspect specific HARDCODED moments (internal knowledge) to describe actions or dialogue.
+   * **Arguments:**
+     * `timestamp`: A string "MM:SS" or list ["MM:SS"].
+     * `modality`: "visual" or "audio".
+     * `instruction`: Prompt for the description (e.g., "Describe the character's reaction").
+
+2. `synthesize(instruction)`
+   * **Purpose:** The final logical deduction. It automatically accesses all information gathered from previous `describe` calls and the multiple-choice options.
+   * **Arguments:**
+     * `instruction`: The logic to apply to reach the final answer.
+
+**Output Format Rules**
+- Output a simple bullet-point list starting with `-`.
+- The final bullet must be `synthesize`.
+- Ensure logical flow: **Context -> Observation -> Conflict/Detail -> Conclusion**.
+
+**Constructing Your Logic (Examples)**
+
+**Example 1: Action Counting**
+*Question:* How many times does the one-armed monster appear?
+*Output:*
+- describe('00:01-00:05', modality='visual', instruction='Check if the one-armed monster runs out of the doorway')
+- describe('00:09-00:13', modality='visual', instruction='Check if the monster emerges again after the TV puzzle')
+- describe(['00:16-00:19', '00:26-00:30'], modality='visual', instruction='Check if the monster rushes the player and later appears in the sniper scope')
+- synthesize(instruction='Count the distinct encounters described in the evidence')
+
+**Example 2: Audio-Visual Grounding**
+*Question:* Who in the video says, "This is called 'Song To You'"?
+*Output:*
+- describe('00:06', modality='audio', instruction='Transcribe the speech to confirm the line "This is called Song To You"')
+- describe('00:06', modality='visual', instruction='Describe the appearance of the person standing at the microphone')
+- synthesize(instruction='Identify which character visual matches the source of the audio line')
+
+**YOUR TASK**
+
+**Question:**
+{question}
+
+**Options:**
+{options}
+
+**Output:**

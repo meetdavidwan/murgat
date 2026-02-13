@@ -1,0 +1,88 @@
+from typing import List, Union, Optional, Dict
+from video_utils import Video, TimeRange, answer_question
+
+"""
+You are an intelligent video analyst. Your task is to write a Python script to answer a specific question based on a provided video.
+
+**The Workflow**
+Generate a Python function `execute_command` that:
+1. Defines **HARDCODED** timestamps (TimeRanges) where relevant events occur.
+2. Inspects those specific moments using `video.query()`.
+3. Collects structured evidence (strings).
+4. Uses `answer_question` to select the final option.
+
+API SPECIFICATION:
+------------------
+class Video:
+    def query(self, time: Union[str, List[str]], question: str, modality: str = "visual") -> str:
+        '''
+        Inspects specific HARDCODED moments to describe actions or dialogue.
+        Args:
+            time: A string "MM:SS" or list ["MM:SS", "MM:SS"].
+            question: Prompt for the description.
+            modality: "visual" or "audio".
+        Returns:
+            str: A text description of the observation.
+        '''
+        pass
+
+def answer_question(question: str, evidence: Dict, options: List[str]) -> str:
+    ''' Synthesizes the final answer using the collected evidence. '''
+    pass
+
+GUIDELINES:
+- **Do NOT use find()**. You must "know" the timestamps (simulate internal knowledge).
+- Write code: use variables and logical flow.
+"""
+
+# EXAMPLE 1: Action Counting
+# Question: How many times does the one-armed monster appear?
+# Options: [A] 1, [B] 2, [C] 4, [D] 5
+def execute_command(video: Video, options: List[str]) -> str:
+    # 1. Inspect specific hardcoded timestamps
+    # Run out of doorway
+    obs_1 = video.query("00:01-00:05", "Check if the one-armed monster runs out of the doorway", modality="visual")
+    
+    # Emerge after TV puzzle
+    obs_2 = video.query("00:09-00:13", "Check if the monster emerges again after the TV puzzle", modality="visual")
+    
+    # Rushes player and sniper scope
+    obs_3 = video.query(["00:16-00:19", "00:26-00:30"], "Check if the monster rushes the player and later appears in the sniper scope", modality="visual")
+
+    evidence = {{
+        "encounter_1": obs_1,
+        "encounter_2": obs_2,
+        "encounter_3": obs_3
+    }}
+
+    return answer_question(
+        question="How many times does the one-armed monster appear?",
+        evidence=evidence,
+        options=options
+    )
+
+# EXAMPLE 2: Audio-Visual Grounding
+# Question: Who in the video says, "This is called 'Song To You'"?
+# Options: [A] The Drummer, [B] The Guitarist, [C] The Singer, [D] The Host
+def execute_command(video: Video, options: List[str]) -> str:
+    # 1. Transcribe the specific audio moment
+    audio_obs = video.query("00:06", "Transcribe the speech to confirm the line 'This is called Song To You'", modality="audio")
+
+    # 2. Describe the visual appearance at that same moment
+    visual_obs = video.query("00:06", "Describe the appearance of the person standing at the microphone", modality="visual")
+
+    evidence = {{
+        "audio_transcript": audio_obs,
+        "visual_source": visual_obs
+    }}
+
+    return answer_question(
+        question="Who in the video says, 'This is called Song To You'?",
+        evidence=evidence,
+        options=options
+    )
+
+# YOUR TASK
+# Question: {question}
+# Options: {options}
+def execute_command(video: Video, options: List[str]) -> str:
