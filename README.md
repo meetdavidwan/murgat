@@ -162,10 +162,13 @@ export PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True" # Memory management
 If you use this framework in your research, please cite:
 
 ```bibtex
-@article{wan2024multimodal,
-  title={Multimodal Fact-Level Attribution for Verifiable Reasoning},
-  author={Wan, David and Wang, Han and Wang, Ziyang and Stengel-Eskin, Elias and Lee, Hyunji and Bansal, Mohit},
-  year={2024}
+@misc{wan2026multimodalfactlevelattributionverifiable,
+      title={Multimodal Fact-Level Attribution for Verifiable Reasoning}, 
+      author={David Wan and Han Wang and Ziyang Wang and Elias Stengel-Eskin and Hyunji Lee and Mohit Bansal},
+      year={2026},
+      eprint={2602.11509},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2602.11509}, 
 }
-
 ```
